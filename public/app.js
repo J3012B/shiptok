@@ -206,7 +206,8 @@ function agentCard(a) {
   const msgs = (a.history || []).length;
   if (a.shot) {
     const m = a.shot.video || /\.mp4$/.test(a.shot.src) ? `<video src="${esc(a.shot.src)}" poster="${esc(a.shot.poster || '')}" muted loop playsinline preload="metadata"></video>` : `<img src="${esc(a.shot.src)}" alt="">`;
-    poster = `<figure class="ashot">${m}<figcaption>${esc(a.shot.label || '')}</figcaption></figure>` + poster;
+    const fig = `<figure class="ashot">${m}<figcaption>${esc(a.shot.label || '')}</figcaption></figure>`;
+    poster = a.status === 'needs-you' ? poster + fig : fig + poster; // a question comes before the picture
   }
   if (a.diff && a.status !== 'running' && a.status !== 'queued') {
     const max = Math.max(1, ...a.diff.files.map(f => f.add + f.del));

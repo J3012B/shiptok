@@ -1,5 +1,7 @@
 # ShipTok
 
+![ShipTok demo: swiping through work cards, sending a Claude agent at a bug, answering its question, and shipping the fix](docs/demo.gif)
+
 **TikTok for your work.** A vertical feed of everything that needs you: PRs waiting on your review, issues, your Notion backlog, and Claude Code sessions waiting for an answer. Swipe through it, send a Claude agent at any card in one tap, and the agent comes back into your feed when it needs a decision, a permission, or is done.
 
 A curator (one cheap Claude call) merges GitHub, your Notion roadmap and your recent Claude Code sessions into ranked cards. Each card plays like a short video, using:
