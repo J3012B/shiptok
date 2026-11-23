@@ -1,0 +1,14 @@
+{
+  "name": "shiptok",
+  "description": "ShipTok: a TikTok-style feed of your work, with Claude agents that come back to the feed when they need you.",
+  "owner": {
+    "name": "ShipTok"
+  },
+  "plugins": [
+    {
+      "name": "shiptok",
+      "source": "./",
+      "description": "A TikTok-style feed of your work, with Claude agents that come back to the feed when they need you."
+    }
+  ]
+}

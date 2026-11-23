@@ -1,0 +1,6 @@
+data/
+data-demo/
+.env
+node_modules/
+.claude/
+.DS_Store

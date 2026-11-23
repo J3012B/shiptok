@@ -1,0 +1,26 @@
+#!/bin/bash
+# shiptok start | stop | restart | status | demo | open | logs
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+HOME_DIR="${SHIPTOK_HOME:-$HOME/.shiptok}"
+mkdir -p "$HOME_DIR"
+PORT="${PORT:-4777}"
+pidfile() { echo "$HOME_DIR/server$1.pid"; }
+running() { local f; f=$(pidfile "$1"); [ -f "$f" ] && kill -0 "$(cat "$f")" 2>/dev/null; }
+start() { # $1 = "" or "-demo"
+  if running "$1"; then echo "already running"; return; fi
+  local args=(); [ "$1" = "-demo" ] && args=(--demo)
+  SHIPTOK_HOME="$HOME_DIR" nohup node "$ROOT/server.mjs" "${args[@]}" >>"$HOME_DIR/server$1.log" 2>&1 &
+  echo $! >"$(pidfile "$1")"; sleep 1
+  if running "$1"; then echo "started: http://127.0.0.1:$([ "$1" = "-demo" ] && echo 4778 || echo "$PORT")"; else echo "failed to start, see $HOME_DIR/server$1.log"; tail -5 "$HOME_DIR/server$1.log"; exit 1; fi
+}
+stop() { if running "$1"; then kill "$(cat "$(pidfile "$1")")"; rm -f "$(pidfile "$1")"; echo "stopped"; else echo "not running"; fi; }
+case "$1" in
+  start) start "" ;;
+  demo) start "-demo"; command -v open >/dev/null && open "http://127.0.0.1:4778" ;;
+  stop) stop ""; stop "-demo" >/dev/null ;;
+  restart) stop ""; start "" ;;
+  status) running "" && echo "live: running on :$PORT" || echo "live: stopped"; running "-demo" && echo "demo: running on :4778" || echo "demo: stopped" ;;
+  open) command -v open >/dev/null && open "http://127.0.0.1:$PORT" || xdg-open "http://127.0.0.1:$PORT" ;;
+  logs) tail -n "${2:-40}" "$HOME_DIR/server.log" ;;
+  *) echo "usage: shiptok start|stop|restart|status|demo|open|logs" ;;
+esac

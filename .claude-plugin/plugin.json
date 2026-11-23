@@ -1,0 +1,19 @@
+{
+  "name": "shiptok",
+  "version": "0.1.0",
+  "description": "A TikTok-style feed of your work. A curator turns your GitHub, Notion roadmap and Claude Code sessions into cards with screenshots and diffs. Swipe, send a Claude agent at a card in one tap, and agents come back into the feed when they need you.",
+  "author": {
+    "name": "ShipTok"
+  },
+  "keywords": [
+    "feed",
+    "agents",
+    "github",
+    "notion",
+    "productivity",
+    "gamification"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/J3012B/shiptok",
+  "repository": "https://github.com/J3012B/shiptok"
+}

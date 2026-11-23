@@ -1,0 +1,233 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:#0f1d24;background:#f5f8f9;-webkit-font-smoothing:antialiased}
+.s{display:none}.s.on{display:block}
+:root{--t:#0e9f8f;--t2:#0b7d71;--ink:#0f1d24;--mut:#6b7c84;--line:#e3eaec;--card:#fff;--warn:#f59e0b;--red:#ef4444;--vio:#7c3aed}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;letter-spacing:-.02em}.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#14b8a6,#0ea5e9);display:block;position:relative}.logo i:after{content:"";position:absolute;inset:7px;border-radius:50%;border:3px solid #fff;border-top-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:11px 16px;font-weight:600;background:var(--t);color:#fff;font-size:14px}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+/* desktop dashboard */
+#dash{width:1440px;height:900px;display:none}#dash.on{display:flex}
+.side{width:236px;background:#0f1d24;color:#cfe0e4;padding:22px 16px;display:flex;flex-direction:column;gap:6px}.side .logo{color:#fff;margin-bottom:22px}
+.side a{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:9px;font-size:14px;font-weight:500}.side a.on{background:#1d3038;color:#fff}.side a b{width:16px;height:16px;border-radius:5px;background:#33505a}
+.main{flex:1;padding:28px 34px;overflow:hidden}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.top h1{margin:0;font-size:26px;letter-spacing:-.02em}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}.kpi .l{font-size:13px;color:var(--mut);font-weight:500}.kpi .v{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:6px 0 4px}.up{color:#059669;font-size:13px;font-weight:600}
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:16px}.chart{height:330px;position:relative}.chart h3,.list h3{margin:0 0 14px;font-size:15px}
+.list .r{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}.list .r:last-child{border:0}.pill{font-size:12px;padding:3px 8px;border-radius:99px;background:#e6f7f5;color:var(--t2);font-weight:600}
+/* phone */
+.phone{width:390px;min-height:844px;background:#fff}
+.ph-top{padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:center}
+.hero{padding:26px 24px 10px}.hero h1{font-size:38px;line-height:1.03;letter-spacing:-.04em;margin:14px 0 12px}.hero p{color:var(--mut);font-size:16px;line-height:1.5;margin:0 0 22px}
+.badge{display:inline-block;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:99px;background:#e6f7f5;color:var(--t2)}
+.mock{margin:22px 20px;border-radius:22px;background:linear-gradient(160deg,#0f1d24,#163640);padding:18px;color:#fff}
+.ev{border-radius:12px;padding:10px 12px;margin:8px 0;font-size:13.5px;font-weight:600}.ev small{display:block;font-weight:500;opacity:.75;margin-top:2px}
+.feat{padding:8px 24px}.feat h2{font-size:24px;letter-spacing:-.03em;margin:26px 0 8px}.feat p{color:var(--mut);line-height:1.55;margin:0 0 10px}
+.quote{margin:20px;border-radius:18px;background:#f5f8f9;padding:20px;font-size:15.5px;line-height:1.5}.quote b{display:block;margin-top:10px;font-size:13px}
+.price{margin:12px 20px;border-radius:18px;border:2px solid var(--t);padding:20px}.price .v{font-size:40px;font-weight:800;letter-spacing:-.04em}
+/* dark mode bug */
+#bug{background:#0b1418;color:#e6eef0;min-height:844px;position:relative}
+#bug .sheet{position:absolute;left:0;right:0;bottom:0;background:#14232a;border-radius:22px 22px 0 0;padding:20px;height:520px}
+#bug label{display:block;font-size:13px;color:#8aa3ab;margin:14px 0 6px}#bug .in{border-radius:10px;background:#0b1418;border:1px solid #29404a;padding:12px;font-size:15px}
+#bug .kb{position:absolute;left:0;right:0;bottom:0;height:290px;background:#2b2f33;display:grid;grid-template-columns:repeat(10,1fr);gap:6px;padding:10px 6px}
+#bug .kb i{background:#4a5056;border-radius:6px;height:42px}
+#bug .save{position:absolute;right:20px;bottom:262px;background:var(--t);color:#fff;border-radius:10px;padding:12px 22px;font-weight:700;opacity:.9}
+#bug .ring{position:absolute;right:6px;bottom:246px;width:150px;height:78px;border:4px solid #ff3b5c;border-radius:50%;transform:rotate(-6deg)}
+#bug .note{position:absolute;right:30px;bottom:330px;background:#ff3b5c;color:#fff;font:700 15px 'Comic Sans MS','Chalkboard SE',cursive;padding:6px 10px;border-radius:8px;transform:rotate(-4deg)}
+/* checkout */
+#checkout{width:1280px;height:800px;background:#f5f8f9;padding:40px 70px}#checkout.on{display:block}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px}.plan.hot{border:2px solid var(--t);box-shadow:0 20px 50px rgba(14,159,143,.15)}
+.plan h3{margin:0;font-size:18px}.plan .v{font-size:44px;font-weight:800;letter-spacing:-.04em;margin:14px 0 2px}.plan ul{padding:0;list-style:none;margin:18px 0;color:var(--mut);font-size:14px;line-height:2}
+.tog{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px;margin-top:16px}.tog span{padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600}.tog span.on{background:var(--ink);color:#fff}
+/* settings */
+.set .row{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);font-size:15px}.sw{width:46px;height:28px;border-radius:99px;background:var(--t);position:relative}.sw:after{content:"";position:absolute;right:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff}.sw.off{background:#d5dfe2}.sw.off:after{right:auto;left:3px}
+.set h4{margin:22px 20px 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.cal{display:flex;gap:12px;align-items:center}.cal b{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:14px}
+/* email */
+#email{width:600px;min-height:900px;background:#eef3f4;padding:30px}.mail{background:#fff;border-radius:18px;overflow:hidden}.mail .bn{height:200px;background:linear-gradient(135deg,#14b8a6,#0ea5e9);display:grid;place-items:center;color:#fff;font-size:34px;font-weight:800;letter-spacing:-.03em;text-align:center;line-height:1.1}
+.mail .bd{padding:30px;font-size:16px;line-height:1.6;color:#33454c}.mail h2{color:var(--ink);font-size:24px;letter-spacing:-.02em;margin:0 0 12px}
+.hl{background:#fff4c2;border-radius:4px;padding:0 3px}
+
+/* new screens */
+.flag{display:inline-block;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px}
+#tz .conf{margin:20px;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+#tz .conf .hd{background:#e6f7f5;padding:18px 20px}#tz .conf .hd b{font-size:20px;letter-spacing:-.02em}
+#tz .row2{display:flex;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--line);font-size:15px}
+#tz .bad{color:var(--red);font-weight:800}#tz .ring2{position:absolute;border:4px solid #ff3b5c;border-radius:50%}
+#tz .note2{position:absolute;background:#ff3b5c;color:#fff;font:700 15px 'Comic Sans MS','Chalkboard SE',cursive;padding:6px 10px;border-radius:8px;transform:rotate(-3deg)}
+#churn{width:1280px;height:520px;padding:36px 48px;background:#f5f8f9}#churn.on{display:block}
+#churn .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:22px}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;font-size:14.5px;line-height:1.5}.q b{display:block;font-size:12.5px;color:var(--mut);margin-top:6px}
+.hb{display:flex;align-items:center;gap:12px;margin:14px 0;font-size:14px;font-weight:600}.hb i{display:block;height:30px;border-radius:8px;background:var(--t)}.hb span{width:150px}
+#ci,#cipass{width:1280px;height:600px;padding:30px 40px;background:#fff}#ci.on,#cipass.on{display:block}
+.run{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:14.5px}
+.run .st{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:13px;font-weight:800}.st.f{background:#dc2626}.st.p{background:#16a34a}
+.run small{color:var(--mut);margin-left:auto}.run code{font-size:13px;background:#f1f5f6;padding:2px 6px;border-radius:5px}
+#fixed{background:#0b1418;color:#e6eef0;min-height:844px;position:relative}
+#fixed .sheet{position:absolute;left:0;right:0;bottom:290px;background:#14232a;border-radius:22px 22px 0 0;padding:20px;height:300px}
+#fixed label{display:block;font-size:13px;color:#8aa3ab;margin:12px 0 6px}#fixed .in{border-radius:10px;background:#0b1418;border:1px solid #29404a;padding:12px;font-size:15px}
+#fixed .bar2{position:absolute;left:0;right:0;bottom:290px;padding:10px 16px;background:#14232a;border-top:1px solid #29404a;display:flex;justify-content:flex-end}
+#fixed .save{background:var(--t);color:#fff;border-radius:10px;padding:12px 22px;font-weight:700}
+#fixed .kb{position:absolute;left:0;right:0;bottom:0;height:290px;background:#2b2f33;display:grid;grid-template-columns:repeat(10,1fr);gap:6px;padding:10px 6px}#fixed .kb i{background:#4a5056;border-radius:6px;height:42px}
+#fixed .ok{position:absolute;right:24px;bottom:356px;background:#16a34a;color:#fff;font:700 15px 'Comic Sans MS','Chalkboard SE',cursive;padding:6px 10px;border-radius:8px;transform:rotate(-3deg)}
+/* motion for recorded clips (?play=1) */
+.play #bug .kb{animation:kbup .7s 1s cubic-bezier(.2,.9,.3,1) both}.play #bug .ring,.play #bug .note{animation:fadein .4s 2.2s both}
+.play #fixed .kb{animation:kbup .7s 1s cubic-bezier(.2,.9,.3,1) both}.play #fixed .bar2,.play #fixed .sheet{animation:liftup .7s 1s cubic-bezier(.2,.9,.3,1) both}.play #fixed .ok{animation:fadein .4s 2.2s both}
+@keyframes kbup{from{transform:translateY(100%)}}@keyframes liftup{from{transform:translateY(290px)}}@keyframes fadein{from{opacity:0;transform:scale(.6) rotate(-3deg)}}
+.play #dash .kpi{animation:fadein2 .5s both}.play #dash .kpi:nth-child(2){animation-delay:.15s}.play #dash .kpi:nth-child(3){animation-delay:.3s}.play #dash .kpi:nth-child(4){animation-delay:.45s}
+.play #dash path[stroke]{stroke-dasharray:1200;animation:draw 2.4s .6s ease-out both}.play #dash path[fill^=url]{animation:fadein2 1s 2s both}
+@keyframes draw{from{stroke-dashoffset:1200}}@keyframes fadein2{from{opacity:0;transform:translateY(10px)}}
+.play #churn .hb i{animation:grow .8s cubic-bezier(.2,.9,.3,1) both;transform-origin:left}.play #churn .hb:nth-child(3) i{animation-delay:.2s}.play #churn .hb:nth-child(4) i{animation-delay:.4s}.play #churn .hb:nth-child(5) i{animation-delay:.6s}
+.play #churn .q{animation:fadein2 .5s both}.play #churn .q:nth-child(2){animation-delay:1s}.play #churn .q:nth-child(3){animation-delay:1.6s}.play #churn .q:nth-child(4){animation-delay:2.2s}
+@keyframes grow{from{transform:scaleX(0)}}
+.play #ci .run{animation:fadein2 .4s both}.play #ci .run:nth-child(3){animation-delay:.5s}.play #ci .run:nth-child(4){animation-delay:1s}.play #ci .run:nth-child(5){animation-delay:1.5s}.play #ci .run:nth-child(6){animation-delay:2s}.play #ci .run:nth-child(7){animation-delay:2.5s}
+</style></head><body>
+
+<section class="s" id="dash">
+  <nav class="side"><div class="logo"><i></i>Tidepool</div>
+    <a class="on"><b></b>Overview</a><a><b></b>Teams</a><a><b></b>Calendars</a><a><b></b>Bookings</a><a><b></b>Billing</a><a><b></b>Settings</a></nav>
+  <div class="main">
+    <div class="top"><h1>Overview</h1><div style="display:flex;gap:10px"><span class="btn ghost">Last 30 days</span><span class="btn">Export</span></div></div>
+    <div class="kpis">
+      <div class="card kpi"><div class="l">New sign-ups</div><div class="v">1,284</div><div class="up">▲ 38% vs last month</div></div>
+      <div class="card kpi"><div class="l">Activation</div><div class="v">61%</div><div class="up">▲ 9 pts</div></div>
+      <div class="card kpi"><div class="l">MRR</div><div class="v">€24.6k</div><div class="up">▲ 12%</div></div>
+      <div class="card kpi"><div class="l">Churn</div><div class="v">2.1%</div><div class="up" style="color:#dc2626">▲ 0.3 pts</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card chart"><h3>Sign-ups per day</h3>
+        <svg viewBox="0 0 800 260" width="100%" height="270"><defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#14b8a6" stop-opacity=".35"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/></linearGradient></defs>
+        <g stroke="#e3eaec"><line x1="0" x2="800" y1="60" y2="60"/><line x1="0" x2="800" y1="130" y2="130"/><line x1="0" x2="800" y1="200" y2="200"/></g>
+        <path d="M0 210 L40 200 L80 205 L120 190 L160 195 L200 185 L240 188 L280 176 L320 180 L360 170 L400 150 L440 140 L480 120 L520 128 L560 100 L600 92 L640 80 L680 70 L720 58 L760 50 L800 36 L800 260 L0 260Z" fill="url(#g)"/>
+        <path d="M0 210 L40 200 L80 205 L120 190 L160 195 L200 185 L240 188 L280 176 L320 180 L360 170 L400 150 L440 140 L480 120 L520 128 L560 100 L600 92 L640 80 L680 70 L720 58 L760 50 L800 36" fill="none" stroke="#0e9f8f" stroke-width="3.5"/>
+        <line x1="400" x2="400" y1="20" y2="250" stroke="#7c3aed" stroke-dasharray="5 5" stroke-width="2"/><rect x="408" y="18" width="150" height="28" rx="8" fill="#7c3aed"/><text x="420" y="37" fill="#fff" font-size="14" font-weight="700" font-family="Inter">New onboarding</text></svg></div>
+      <div class="card list"><h3>Top teams this week</h3>
+        <div class="r">Northwind Studio <span class="pill">+42 seats</span></div><div class="r">Bright Labs <span class="pill">+18 seats</span></div><div class="r">Oak &amp; Ivy <span class="pill">+11 seats</span></div><div class="r">Kestrel Health <span class="pill">+9 seats</span></div><div class="r">Fable Coffee <span class="pill">+6 seats</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s phone" id="landing">
+  <div class="ph-top"><div class="logo"><i></i>Tidepool</div><span class="btn" style="padding:9px 14px">Try free</span></div>
+  <div class="hero"><span class="badge">✨ New: two-way Google sync</span><h1>Your team's week, finally in one calm place.</h1><p>Tidepool finds the time that works for everyone, protects focus blocks and books meetings without the back-and-forth.</p><span class="btn" style="width:100%;padding:16px;font-size:16px">Start free — no card</span></div>
+  <div class="mock"><div style="font-size:13px;opacity:.7;margin-bottom:6px">Thursday · 14 Nov</div>
+    <div class="ev" style="background:#14b8a6">Design review<small>10:00 – 10:45 · 6 people</small></div>
+    <div class="ev" style="background:#7c3aed">Focus block 🎧<small>11:00 – 13:00 · protected</small></div>
+    <div class="ev" style="background:#0ea5e9">Lunch with Maya<small>13:15 – 14:00</small></div>
+    <div class="ev" style="background:#f59e0b;color:#1f1300">Customer call — Northwind<small>15:30 – 16:00 · booked via link</small></div></div>
+  <div class="feat"><h2>Finds the slot in seconds</h2><p>Drop a link in any chat. Tidepool reads everyone's calendars and offers only the times that actually work.</p>
+    <h2>Guards your focus</h2><p>Mark deep-work hours once. Meetings flow around them, automatically.</p></div>
+  <div class="quote">“We cut scheduling emails to zero in the first week. It just quietly works.”<b>Lena Park · Ops lead, Northwind Studio</b></div>
+  <div class="price"><div style="font-weight:700">Team</div><div class="v">€8<span style="font-size:16px;color:var(--mut);font-weight:500"> /seat/month</span></div><p style="color:var(--mut);margin:6px 0 16px">Unlimited booking links, Google + Outlook sync, focus guard.</p><span class="btn" style="width:100%">Start 14-day trial</span></div>
+  <div style="padding:30px 24px;color:var(--mut);font-size:13px">© Tidepool · Privacy · Terms</div>
+</section>
+
+<section class="s phone" id="bug">
+  <div class="ph-top" style="color:#fff"><span style="font-size:22px">‹</span><b>New booking link</b><span></span></div>
+  <div style="padding:10px 20px;color:#8aa3ab;font-size:14px">Dark mode · iPhone 15</div>
+  <div class="sheet"><b style="font-size:18px">Link details</b>
+    <label>Name</label><div class="in">Intro call — 30 min</div>
+    <label>Who can book</label><div class="in">Anyone with the link</div>
+    <label>Buffer between meetings</label><div class="in">10 minutes|</div>
+  </div>
+  <span class="save">Save</span><div class="kb"></div><div class="ring"></div><div class="note">hidden behind keyboard!</div>
+</section>
+
+<section class="s" id="checkout">
+  <div class="logo"><i></i>Tidepool</div>
+  <h1 style="font-size:40px;letter-spacing:-.04em;margin:26px 0 0">Pick the plan for your team</h1>
+  <div class="tog"><span>Monthly</span><span class="on">Yearly · 2 months free</span></div>
+  <div class="plans">
+    <div class="plan"><h3>Solo</h3><div class="v">€0</div><div style="color:var(--mut)">forever</div><ul><li>1 calendar</li><li>3 booking links</li><li>Email support</li></ul><span class="btn ghost" style="width:100%">Current plan</span></div>
+    <div class="plan hot"><h3>Team <span class="pill" style="margin-left:6px">Most popular</span></h3><div class="v">€80</div><div style="color:var(--mut)">per seat / year</div><ul><li>Unlimited booking links</li><li>Google + Outlook two-way sync</li><li>Focus guard</li><li>Round-robin scheduling</li></ul><span class="btn" style="width:100%">Upgrade</span></div>
+    <div class="plan"><h3>Business</h3><div class="v">€160</div><div style="color:var(--mut)">per seat / year</div><ul><li>Everything in Team</li><li>SSO + SCIM</li><li>Audit log</li><li>Priority support</li></ul><span class="btn ghost" style="width:100%">Talk to us</span></div>
+  </div>
+</section>
+
+<section class="s phone set" id="settings">
+  <div class="ph-top"><span style="font-size:22px">‹</span><b>Calendar sync</b><span style="color:var(--t);font-weight:600">Done</span></div>
+  <h4>Connected</h4>
+  <div class="row"><div class="cal"><b style="background:#ea4335">G</b><div>Google Calendar<div style="font-size:13px;color:var(--mut)">lena@northwind.studio</div></div></div><div class="sw"></div></div>
+  <div class="row"><div class="cal"><b style="background:#0078d4">O</b><div>Outlook<div style="font-size:13px;color:var(--mut)">Not connected</div></div></div><span style="color:var(--t);font-weight:600">Connect</span></div>
+  <h4>Two-way sync <span class="pill" style="text-transform:none;letter-spacing:0">New</span></h4>
+  <div class="row">Write Tidepool bookings to Google<div class="sw"></div></div>
+  <div class="row">Show Google events as busy<div class="sw"></div></div>
+  <div class="row">Copy event descriptions<div class="sw off"></div></div>
+  <h4>Sync status</h4>
+  <div class="row">Last synced<span style="color:var(--mut)">12 seconds ago</span></div>
+  <div class="row">Events in sync<span style="color:#059669;font-weight:700">1,942 ✓</span></div>
+  <div style="padding:22px 20px"><span class="btn ghost" style="width:100%;color:#dc2626">Disconnect Google</span></div>
+</section>
+
+<section class="s" id="email"><div class="mail"><div class="bn">Your calendar just<br>got a lot calmer 🌊</div>
+  <div class="bd"><h2>Hi {{first_name}},</h2>
+  <p>Tidepool now syncs <b>both ways</b> with Google Calendar. Book a meeting in Tidepool and it lands in Google instantly — and the other way round.</p>
+  <p>Teams who switched on two-way sync during the beta <span class="hl">cut double-bookings by 94%</span>.</p>
+  <p style="margin:26px 0"><span class="btn" style="padding:14px 22px;font-size:16px">Turn on two-way sync →</span></p>
+  <p style="font-size:14px;color:#8a9aa0">Sent to 4,812 people on Friday 28 Nov, 9:00 CET · Unsubscribe</p></div></div></section>
+
+
+<section class="s phone" id="tz">
+  <div class="ph-top"><span style="font-size:22px">‹</span><b>Booking confirmed</b><span></span></div>
+  <div class="conf"><div class="hd"><span class="flag" style="background:#0e9f8f;color:#fff">Confirmed</span><br><b>Quarterly review · Northwind</b><div style="color:var(--mut);margin-top:4px">Booked by Lena Park</div></div>
+    <div class="row2">Lena (Lisbon)<b>Thu 14:00</b></div>
+    <div class="row2">Jonas (Berlin)<span class="bad">Thu 16:00</span></div>
+    <div class="row2">Should be (Berlin)<b style="color:#16a34a">Thu 15:00</b></div>
+    <div class="row2">Duration<b>45 min</b></div></div>
+  <div style="margin:0 20px;padding:14px 16px;border-radius:14px;background:#fff4e5;color:#92400e;font-size:14px;line-height:1.5"><b>2 customer reports</b> since clocks changed on 26 Oct. Lisbon is UTC+0, Berlin UTC+1.</div>
+  <div class="ring2" style="left:236px;top:226px;width:130px;height:58px;transform:rotate(-5deg)"></div>
+  <div class="note2" style="left:236px;top:142px">1 hour off!</div>
+</section>
+
+<section class="s" id="churn">
+  <div class="logo"><i></i>Tidepool</div>
+  <h1 style="font-size:32px;letter-spacing:-.03em;margin:22px 0 0">Churn interviews · November <span class="pill" style="font-size:14px;vertical-align:middle">9 teams</span></h1>
+  <div class="cols">
+    <div><div class="q">“We live in Outlook. Without two-way sync we were double-booked twice a week.”<b>Ops lead · Oak &amp; Ivy</b></div>
+      <div class="q">“Half our team works two days a week. Paying a full seat for them felt wrong.”<b>Founder · Bright Labs</b></div>
+      <div class="q">“Sales needed round-robin. We moved everyone to one tool that had it.”<b>Head of Sales · Kestrel Health</b></div></div>
+    <div class="card"><h3 style="margin:0 0 6px;font-size:16px">Why they left</h3>
+      <div class="hb"><span>No Outlook sync</span><i style="width:250px"></i>5</div>
+      <div class="hb"><span>Price for part-timers</span><i style="width:150px;background:#f59e0b"></i>3</div>
+      <div class="hb"><span>No round-robin</span><i style="width:100px;background:#7c3aed"></i>2</div>
+      <div class="hb"><span>Other</span><i style="width:50px;background:#94a3b8"></i>1</div></div>
+  </div>
+</section>
+
+<section class="s" id="ci">
+  <div style="display:flex;align-items:center;gap:12px"><div class="logo"><i></i>tidepool/app</div><span class="flag" style="background:#fee2e2;color:#b91c1c">main is failing</span></div>
+  <h2 style="margin:22px 0 8px;font-size:22px">CI · last runs on main</h2>
+  <div class="run"><span class="st f">✕</span><b>e2e</b> <code>checkout.spec.ts</code> timed out after 30 s<small>12 min ago</small></div>
+  <div class="run"><span class="st p">✓</span><b>e2e</b> retry passed<small>14 min ago</small></div>
+  <div class="run"><span class="st f">✕</span><b>e2e</b> <code>checkout.spec.ts</code> timed out after 30 s<small>41 min ago</small></div>
+  <div class="run"><span class="st p">✓</span><b>unit</b> 214 passed<small>41 min ago</small></div>
+  <div class="run"><span class="st f">✕</span><b>e2e</b> <code>checkout.spec.ts</code> waiting for “Payment succeeded”<small>1 h ago</small></div>
+  <div class="run"><span class="st p">✓</span><b>lint</b> clean<small>1 h ago</small></div>
+  <div style="margin-top:22px;padding:14px 16px;border-radius:12px;background:#f5f8f9;font-size:14.5px"><b>4 pull requests</b> are blocked: #418 pricing, #412 two-way sync, #419 i18n, #420 onboarding copy</div>
+</section>
+
+<section class="s phone" id="fixed">
+  <div class="ph-top" style="color:#fff"><span style="font-size:22px">‹</span><b>New booking link</b><span></span></div>
+  <div style="padding:10px 20px;color:#8aa3ab;font-size:14px">Dark mode · iPhone 15 · after the fix</div>
+  <div class="sheet"><b style="font-size:18px">Link details</b><label>Name</label><div class="in">Intro call — 30 min</div><label>Buffer between meetings</label><div class="in">10 minutes|</div></div>
+  <div class="bar2"><span class="save">Save</span></div><div class="kb"></div><div class="ok">Save stays above the keys</div>
+</section>
+
+<section class="s" id="cipass">
+  <div style="display:flex;align-items:center;gap:12px"><div class="logo"><i></i>tidepool/app</div><span class="flag" style="background:#dcfce7;color:#166534">main is green</span></div>
+  <h2 style="margin:22px 0 8px;font-size:22px">PR #421 · wait for the payment event, not 5 seconds</h2>
+  <div class="run"><span class="st p">✓</span><b>e2e</b> <code>checkout.spec.ts</code> run 50 of 50<small>just now</small></div>
+  <div class="run"><span class="st p">✓</span><b>e2e</b> full suite 38 passed<small>2 min ago</small></div>
+  <div class="run"><span class="st p">✓</span><b>unit</b> 216 passed<small>3 min ago</small></div>
+  <div class="run"><span class="st p">✓</span><b>lint</b> clean<small>3 min ago</small></div>
+  <div style="margin-top:22px;padding:14px 16px;border-radius:12px;background:#f0fdf4;font-size:14.5px"><b>0 of 50</b> runs flaked, down from about 1 in 3</div>
+</section>
+
+<script>
+const s = new URLSearchParams(location.search).get('s') || 'dash';
+document.getElementById(s).classList.add('on');
+if (new URLSearchParams(location.search).get('play')) document.body.classList.add('play');
+document.querySelectorAll('.kb').forEach(k => k.innerHTML = '<i></i>'.repeat(30));
+</script>
+</body></html>
