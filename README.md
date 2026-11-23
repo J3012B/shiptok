@@ -12,7 +12,7 @@ A curator (one cheap Claude call) merges GitHub, your Notion roadmap and your re
 
 You get XP, combos and a streak for clearing it.
 
-> **Want it on your phone, without your laptop running?** A hosted version is in the works: the curator runs in the cloud, with push notifications for agents that need you. [Join the waitlist](https://github.com/J3012B/shiptok/issues/1) by subscribing to that issue. We'll post there when it opens.
+> **Want it on your phone, without your laptop running?** A hosted version is in the works: the curator runs in the cloud, with push notifications for agents that need you. [Join the waitlist](https://github.com/J3012B/shiptok/issues/1) by subscribing to that issue, or [reserve a founding spot for €19](https://buy.stripe.com/cNicN4dObb867yQ2FYd3i01). It's credited toward your subscription, and fully refundable until launch.
 
 ## Install
 
